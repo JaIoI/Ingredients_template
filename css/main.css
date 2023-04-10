@@ -2374,8 +2374,8 @@ button {
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 5rem; }
   .card__img {
-    width: 357px;
-    height: 226px;
+    width: 357rem;
+    height: 226rem;
     margin-left: -23rem;
     margin-right: -23rem;
     padding-top: 1rem;
