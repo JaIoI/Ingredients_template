@@ -2339,6 +2339,7 @@ button {
   .catalog .section__title {
     margin-bottom: 44rem; }
   .catalog .section__subtitle {
+	 font-weight: 400;
     margin-bottom: 34rem; }
   .catalog .lines {
     top: 405rem; }
