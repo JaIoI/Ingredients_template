@@ -2463,6 +2463,7 @@ button {
   .catalog .section__title {
     margin-bottom: 44rem; }
   .catalog .section__subtitle {
+	 font-weight: 400;
     margin-bottom: 34rem; }
   .catalog .lines {
     top: 405rem; }
@@ -2498,8 +2499,8 @@ button {
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 5rem; }
   .card__img {
-    width: 357px;
-    height: 226px;
+    width: 357rem;
+    height: 226rem;
     margin-left: -23rem;
     margin-right: -23rem;
     padding-top: 1rem;
