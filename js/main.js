@@ -167,6 +167,9 @@ $('.displaying').on('click', function (evt) {
   var $this = $(this);
   var $root = $this.closest('.section');
   var $swipers = $root.find('.swiper');
+  $swipers.each(function (index, element) {
+    element.swiper.destroy();
+  });
   if ($this.hasClass('displaying_tiles')) {
     $this.removeClass('displaying_tiles').addClass('displaying_list');
     $root.addClass('section_displaying_list');
@@ -181,7 +184,7 @@ $('.displaying').on('click', function (evt) {
       element.swiper.update();
     });
   }
-  setTimeout(swiperUpdate, 500);
+  setTimeout(swiperUpdate, 10);
 });
 
 /***/ }),
