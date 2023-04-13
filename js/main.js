@@ -155,6 +155,55 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/components/displaying.js":
+/*!*****************************************!*\
+  !*** ./src/js/components/displaying.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.displaying').on('click', function (evt) {
+  evt.preventDefault();
+  var $this = $(this);
+  var $root = $this.closest('.section');
+  var $swipers = $root.find('.swiper');
+  if ($this.hasClass('displaying_tiles')) {
+    $this.removeClass('displaying_tiles').addClass('displaying_list');
+    $root.addClass('section_displaying_list');
+    Swiper_grid(1, 1, 5);
+  } else if ($this.hasClass('displaying_list')) {
+    $this.removeClass('displaying_list').addClass('displaying_tiles');
+    $root.removeClass('section_displaying_list');
+    Swiper_grid(4, 4, 3);
+  }
+  function swiperUpdate() {
+    $swipers.each(function (index, element) {
+      element.swiper.update();
+    });
+  }
+  setTimeout(swiperUpdate, 500);
+});
+
+/***/ }),
+
+/***/ "./src/js/components/dropdown.js":
+/*!***************************************!*\
+  !*** ./src/js/components/dropdown.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.dropdown_btn').on('click', function (evt) {
+  $(this).parent('.dropdown').toggleClass('open');
+});
+$(document).on('click', function (evt) {
+  if ($(evt.target).closest('.dropdown').length === 0) {
+    $('.dropdown').removeClass('open');
+  }
+});
+
+/***/ }),
+
 /***/ "./src/js/components/header.js":
 /*!*************************************!*\
   !*** ./src/js/components/header.js ***!
@@ -456,6 +505,37 @@ if (document.querySelector('[data-social]')) {
 
 /***/ }),
 
+/***/ "./src/js/components/swiper_grid.js":
+/*!******************************************!*\
+  !*** ./src/js/components/swiper_grid.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.Swiper_grid = function (slidesPerView, slidesPerGroup, rows) {
+  var swiper_grid = new Swiper('.swiper_grid', {
+    modules: [Navigation, Pagination, Grid],
+    slidesPerView: slidesPerView,
+    slidesPerGroup: slidesPerGroup,
+    grid: {
+      rows: rows,
+      fill: 'row'
+    },
+    speed: 1000,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction"
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    }
+  });
+};
+Swiper_grid(4, 4, 3);
+
+/***/ }),
+
 /***/ "./src/js/components/swiper_materials.js":
 /*!***********************************************!*\
   !*** ./src/js/components/swiper_materials.js ***!
@@ -469,7 +549,7 @@ var swiper_materials_1 = new Swiper('.swiper_materials_1', {
   modules: [Navigation, Pagination],
   slidesPerView: 2,
   slidesPerGroup: 2,
-  speed: 200,
+  speed: 1000,
   spaceBetween: SLIDES_GAP / CONTAINER_WIDTH * 100 + '%',
   pagination: {
     el: ".swiper-pagination",
@@ -484,7 +564,7 @@ var swiper_materials_2 = new Swiper('.swiper_materials_2', {
   modules: [Navigation, Pagination],
   slidesPerView: 2,
   slidesPerGroup: 2,
-  speed: 200,
+  speed: 1000,
   spaceBetween: SLIDES_GAP / CONTAINER_WIDTH * 100 + '%',
   pagination: {
     el: ".swiper-pagination",
@@ -495,19 +575,6 @@ var swiper_materials_2 = new Swiper('.swiper_materials_2', {
     prevEl: ".swiper-button-prev"
   }
 });
-var switcher_btns = $('.switcher__btn');
-var switcher__contents = $('.switcher__content');
-if (switcher_btns) {
-  switcher_btns.on('click', function (event) {
-    $('.switcher__btn').removeClass('active');
-    $(this).toggleClass('active');
-    var index = $(this).index();
-    switcher__contents.addClass('switcher__content_hide');
-    $(switcher__contents[index]).removeClass('switcher__content_hide');
-    var swiper_update = eval('swiper_materials_' + ++index);
-    swiper_update.slideTo(0, 0, false);
-  });
-}
 
 /***/ }),
 
@@ -523,7 +590,7 @@ var CONTAINER_WIDTH = 1004;
 var swiper_news = new Swiper('.swiper_news', {
   modules: [Navigation, Pagination],
   slidesPerView: 4,
-  speed: 200,
+  speed: 1000,
   spaceBetween: SLIDES_GAP / CONTAINER_WIDTH * 100 + '%',
   pagination: {
     el: ".swiper-pagination",
@@ -550,7 +617,7 @@ var swiper_solutions = new Swiper('.swiper_solutions', {
   modules: [Navigation, Pagination],
   slidesPerView: 3,
   slidesPerGroup: 3,
-  speed: 200,
+  speed: 1000,
   spaceBetween: SLIDES_GAP / CONTAINER_WIDTH * 100 + '%',
   pagination: {
     el: ".swiper-pagination",
@@ -577,7 +644,7 @@ var swiper_vendors = new Swiper('.swiper_vendors', {
   modules: [Navigation, Pagination],
   slidesPerView: 4,
   slidesPerGroup: 4,
-  speed: 200,
+  speed: 1000,
   spaceBetween: SLIDES_GAP / CONTAINER_WIDTH * 100 + '%',
   pagination: {
     el: ".swiper-pagination",
@@ -598,7 +665,20 @@ var swiper_vendors = new Swiper('.swiper_vendors', {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+var switcher_btns = $('.switcher__btn');
+var switcher__contents = $('.switcher__content');
+if (switcher_btns.length > 0) {
+  switcher_btns.on('click', function (evt) {
+    evt.preventDefault();
+    $('.switcher__btn').removeClass('active');
+    $(this).toggleClass('active');
+    var index = $(this).index();
+    switcher__contents.addClass('switcher__content_hide');
+    $(switcher__contents[index]).removeClass('switcher__content_hide');
+    var swiper_update = $(this).closest('.section').find('.swiper');
+    swiper_update[index].swiper.slideTo(0, 0, false);
+  });
+}
 
 /***/ }),
 
@@ -822,18 +902,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollToAnchor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/scrollToAnchor */ "./src/js/modules/scrollToAnchor.js");
 /* harmony import */ var _components_jquery_nice_select__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/jquery.nice-select */ "./src/js/components/jquery.nice-select.js");
 /* harmony import */ var _components_jquery_nice_select__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_jquery_nice_select__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_switcher__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/switcher */ "./src/js/components/switcher.js");
-/* harmony import */ var _components_switcher__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_components_switcher__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_swiper_materials__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/swiper_materials */ "./src/js/components/swiper_materials.js");
-/* harmony import */ var _components_swiper_materials__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_materials__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _components_swiper_solutions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/swiper_solutions */ "./src/js/components/swiper_solutions.js");
-/* harmony import */ var _components_swiper_solutions__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_solutions__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _components_swiper_vendors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/swiper_vendors */ "./src/js/components/swiper_vendors.js");
-/* harmony import */ var _components_swiper_vendors__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_vendors__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _components_swiper_news__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/swiper_news */ "./src/js/components/swiper_news.js");
-/* harmony import */ var _components_swiper_news__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_news__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _components_swiper_materials__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/swiper_materials */ "./src/js/components/swiper_materials.js");
+/* harmony import */ var _components_swiper_materials__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_materials__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _components_swiper_solutions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/swiper_solutions */ "./src/js/components/swiper_solutions.js");
+/* harmony import */ var _components_swiper_solutions__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_solutions__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _components_swiper_vendors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/swiper_vendors */ "./src/js/components/swiper_vendors.js");
+/* harmony import */ var _components_swiper_vendors__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_vendors__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _components_swiper_news__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/swiper_news */ "./src/js/components/swiper_news.js");
+/* harmony import */ var _components_swiper_news__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_news__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_swiper_grid__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/swiper_grid */ "./src/js/components/swiper_grid.js");
+/* harmony import */ var _components_swiper_grid__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_components_swiper_grid__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _components_navigation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/navigation */ "./src/js/components/navigation.js");
 /* harmony import */ var _components_navigation__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_components_navigation__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _components_switcher__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/switcher */ "./src/js/components/switcher.js");
+/* harmony import */ var _components_switcher__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_components_switcher__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _components_displaying__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/displaying */ "./src/js/components/displaying.js");
+/* harmony import */ var _components_displaying__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_components_displaying__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/components/dropdown.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_components_dropdown__WEBPACK_IMPORTED_MODULE_18__);
+
+
+
 
 
 
@@ -1009,6 +1098,7 @@ window.Swiper = swiper__WEBPACK_IMPORTED_MODULE_5__["default"];
 window.Navigation = swiper__WEBPACK_IMPORTED_MODULE_5__["Navigation"];
 window.Pagination = swiper__WEBPACK_IMPORTED_MODULE_5__["Pagination"];
 window.EffectFade = swiper__WEBPACK_IMPORTED_MODULE_5__["EffectFade"];
+window.Grid = swiper__WEBPACK_IMPORTED_MODULE_5__["Grid"];
 // window.objectFitVideos = objectFitVideos;
 
 __webpack_require__(/*! ninelines-ua-parser */ "./node_modules/ninelines-ua-parser/dist/ninelines-ua-parser.js");
