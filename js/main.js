@@ -721,7 +721,7 @@ if ($switcher_btns.length > 0) {
     var $switcher_contents = $switcher_container.find('.switcher__content');
     var switcher_content_height = $($switcher_contents[index]).outerHeight();
     $this.siblings('.switcher__btn').removeClass('active');
-    $this.toggleClass('active');
+    $this.addClass('active');
     $switcher_contents.each(function (index, elem) {
       $(elem).removeClass('active');
       var $invalid_inputs = $(elem).find('.invalid');
