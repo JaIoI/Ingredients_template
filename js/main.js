@@ -721,7 +721,7 @@ if ($switcher_btns.length > 0) {
     var $switcher_contents = $switcher_container.find('.switcher__content');
     var switcher_content_height = $($switcher_contents[index]).outerHeight();
     $this.siblings('.switcher__btn').removeClass('active');
-    $this.toggleClass('active');
+    $this.addClass('active');
     $switcher_contents.each(function (index, elem) {
       $(elem).removeClass('active');
       var $invalid_inputs = $(elem).find('.invalid');
@@ -738,6 +738,60 @@ if ($switcher_btns.length > 0) {
       $swiper_update[index].swiper.slideTo(0, 0, false);
     }
   });
+}
+document.querySelectorAll('.drop-zone__input').forEach(function (inputElement) {
+  var dropZoneElement = inputElement.closest('.drop-zone');
+  dropZoneElement.addEventListener('click', function (e) {
+    inputElement.click();
+  });
+  inputElement.addEventListener('change', function (e) {
+    if (inputElement.files.length) {
+      updateProgress(dropZoneElement, inputElement.files);
+    }
+  });
+  dropZoneElement.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    dropZoneElement.classList.add('drop-zone--over');
+  });
+  ['dragleave', 'dragend'].forEach(function (type) {
+    dropZoneElement.addEventListener(type, function (e) {
+      dropZoneElement.classList.remove('drop-zone--over');
+    });
+  });
+  dropZoneElement.addEventListener('drop', function (e) {
+    e.preventDefault();
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateProgress(dropZoneElement, e.dataTransfer.files);
+    }
+    dropZoneElement.classList.remove('drop-zone--over');
+  });
+});
+function updateProgress(dropZoneElement, files) {
+  var progressElements = dropZoneElement.nextElementSibling;
+
+  // First time - remove the prompt
+  if (progressElements) {
+    progressElements.remove();
+  }
+  progressElements = document.createElement('div');
+  progressElements.classList.add('progress_elements');
+  dropZoneElement.after(progressElements);
+  files.forEach(function (elem) {
+    var progressElement = document.createElement('div');
+    progressElement.classList.add('file__progress');
+    var fileNameElement = document.createElement('div');
+    fileNameElement.classList.add('file__name');
+    fileNameElement.innerHTML = elem.name;
+    var fileWeightElement = document.createElement('div');
+    fileWeightElement.classList.add('file__weight');
+    fileWeightElement.innerHTML = Math.trunc(elem.size / 1024) + ' kb';
+    var fileIconElement = document.createElement('div');
+    fileIconElement.classList.add('file__icon');
+    progressElement.append(fileNameElement, fileWeightElement, fileIconElement);
+    progressElements.appendChild(progressElement);
+  });
+  switcherContainerHeight();
 }
 
 /***/ }),

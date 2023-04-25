@@ -1589,11 +1589,158 @@ button {
     .form__link a span::before {
       content: none; }
 
+.form .checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 1.5rem solid #181818; }
+  .form .checkbox::after {
+    content: "";
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 8rem;
+    height: 5rem;
+    border: 1.5rem solid #181818;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    opacity: 0;
+    -webkit-transition: 500ms;
+    -o-transition: 500ms;
+    transition: 500ms; }
+  .form .checkbox_text > span {
+    color: #7C9DA8; }
+
+.form__checkbox {
+  position: relative;
+  max-width: 700rem;
+  margin-bottom: 24rem;
+  padding-left: 34rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: 16rem;
+  line-height: 150%; }
+  .form__checkbox label {
+    cursor: pointer; }
+  .form__checkbox input:checked + .checkbox::after {
+    opacity: 1; }
+
+.form .files + * {
+  margin-top: 48rem; }
+
+.form .files + .files {
+  margin-top: 24rem; }
+
+.form .files__zone {
+  position: relative;
+  min-height: 128rem;
+  margin-bottom: 16rem;
+  padding: 20rem 20rem 20rem 128rem;
+  font-size: 16rem;
+  line-height: 150%;
+  border: 2rem dashed #DEE4F3;
+  border-radius: 5rem;
+  background: url(../images/forms/jpeg.svg) no-repeat 24rem 24rem/80rem;
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms; }
+
+.form .files__title {
+  margin-bottom: 8rem; }
+
+.form .files__descr {
+  max-width: 440rem;
+  color: #999; }
+
+.form .files__btn {
+  position: absolute;
+  top: 38rem;
+  right: 24rem;
+  min-width: 140rem;
+  padding: 13rem 20rem;
+  font-weight: 700;
+  font-size: 16rem;
+  line-height: 150%;
+  border: 1rem solid #BBCBD0;
+  -webkit-box-shadow: 5rem 5rem 25rem rgba(153, 173, 187, 0.1);
+          box-shadow: 5rem 5rem 25rem rgba(153, 173, 187, 0.1);
+  border-radius: 5px;
+  background: none; }
+
+.form .file__progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 52rem;
+  padding: 13rem 24rem;
+  font-size: 16rem;
+  line-height: 150%;
+  background: rgba(222, 228, 243, 0.5);
+  border: 1rem solid #DEE4F3;
+  border-radius: 5rem; }
+  .form .file__progress:not(:last-child) {
+    margin-bottom: 20rem; }
+
+.form .file__name {
+  margin-right: 16rem; }
+
+.form .file__weight {
+  color: #999; }
+
+.form .file__icon {
+  margin-left: auto; }
+
 .form .required {
   background: url(../images/icons/asterisk.svg) no-repeat center right 24rem/15rem; }
 
 .form_login {
   max-width: 1003rem; }
+
+.drop-zone--over {
+  border-color: red !important; }
+
+.drop-zone__thumbs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  grid-gap: 20rem;
+  margin-top: 30rem; }
+
+.drop-zone__thumb {
+  width: 200rem;
+  height: 200rem;
+  border-radius: 10rem;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  background-position: center;
+  position: relative; }
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5rem 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14rem;
+  text-align: center; }
 
 .header {
   position: fixed;
