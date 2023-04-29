@@ -810,6 +810,17 @@ function updateProgress(dropZoneElement, files) {
   });
   switcherContainerHeight();
 }
+$('.section_messages .switcher__btn').on('click', function (evt) {
+  evt.preventDefault();
+  var $this = $(this);
+  var $section = $this.closest('.section');
+  var $messages = $section.find('.messages');
+  if ($this.hasClass('all_messages')) {
+    $messages.removeClass('unread_only');
+  } else {
+    $messages.addClass('unread_only');
+  }
+});
 
 /***/ }),
 

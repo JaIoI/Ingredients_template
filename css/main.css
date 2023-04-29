@@ -1482,6 +1482,64 @@ button {
     background: -o-linear-gradient(top, #EFF3F6 5%, transparent 50%);
     background: linear-gradient(180deg, #EFF3F6 5%, transparent 50%); }
 
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  max-width: 200rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-top: 36rem;
+  margin-left: auto; }
+  .pagination .pagination__inner {
+    position: static;
+    min-width: 54rem;
+    text-align: right;
+    margin-left: 13rem; }
+  .pagination .pagination__button-prev,
+  .pagination .pagination__button-next {
+    position: static;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 30rem;
+    height: 30rem;
+    margin: 0;
+    padding: 0;
+    background: none; }
+    .pagination .pagination__button-prev::after,
+    .pagination .pagination__button-next::after {
+      content: '';
+      width: 10rem;
+      height: 10rem;
+      border: 2rem solid #201702;
+      -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+              transform: rotate(45deg); }
+  .pagination .pagination__button-prev {
+    margin-right: 5rem; }
+    .pagination .pagination__button-prev::after {
+      content: '';
+      width: 15rem;
+      height: 15rem;
+      border-top: none;
+      border-right: none; }
+  .pagination .pagination__button-next::after {
+    border-left: none;
+    border-bottom: none; }
+
 .form__item {
   position: relative;
   display: -webkit-box;
@@ -3496,5 +3554,140 @@ button {
     padding-right: 29rem; }
     .tag input:checked ~ span::before, .tag input:checked ~ span::after {
       opacity: 1; }
+
+.section_messages {
+  padding-top: 80rem; }
+  .section_messages .switcher__control {
+    margin-bottom: 32rem; }
+  .section_messages .switcher__btn {
+    min-width: auto; }
+  .section_messages .search input::-webkit-input-placeholder {
+    color: #999; }
+  .section_messages .search input::-moz-placeholder {
+    color: #999; }
+  .section_messages .search input:-ms-input-placeholder {
+    color: #999; }
+  .section_messages .search input::-ms-input-placeholder {
+    color: #999; }
+  .section_messages .search input::placeholder {
+    color: #999; }
+
+.message {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20rem 26rem;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: -10rem -10rem 20rem rgba(255, 255, 255, 0.2), 10rem 10rem 10rem rgba(139, 168, 189, 0.05);
+          box-shadow: -10rem -10rem 20rem rgba(255, 255, 255, 0.2), 10rem 10rem 10rem rgba(139, 168, 189, 0.05);
+  border-radius: 10rem;
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms; }
+  .message:not(:last-child) {
+    margin-bottom: 20rem; }
+  .message__img {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    width: 70rem;
+    height: 70rem;
+    margin-right: 20rem;
+    border-radius: 70rem;
+    overflow: hidden; }
+  .message__inner {
+    position: relative; }
+    .message__inner::after {
+      content: ""; }
+  .message__top {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: auto 1fr;
+    grid-template-columns: auto 1fr;
+    margin-bottom: 4rem;
+    padding-right: 50rem; }
+  .message__author {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    margin-right: 2rem;
+    font-size: 20rem;
+    line-height: 150%;
+    color: #7C9DA8;
+    -webkit-transition: color 500ms;
+    -o-transition: color 500ms;
+    transition: color 500ms; }
+    .message__author:after {
+      content: ":"; }
+  .message__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 20rem;
+    line-height: 150%;
+    color: #999;
+    -webkit-transition: color 500ms;
+    -o-transition: color 500ms;
+    transition: color 500ms; }
+  .message__bottom {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    color: #999;
+    -webkit-transition: color 500ms;
+    -o-transition: color 500ms;
+    transition: color 500ms; }
+    .message__bottom span + span {
+      margin-left: 9rem; }
+      .message__bottom span + span::before {
+        content: "";
+        display: inline-block;
+        width: 4rem;
+        height: 4rem;
+        margin-right: 7rem;
+        margin-bottom: 3rem;
+        background: #999;
+        border-radius: 4rem;
+        -webkit-transition: background 500ms;
+        -o-transition: background 500ms;
+        transition: background 500ms; }
+  .message__passed {
+    margin-left: auto;
+    color: #7C9DA8;
+    -webkit-transition: color 500ms;
+    -o-transition: color 500ms;
+    transition: color 500ms; }
+  .message.unread .message__inner {
+    padding-left: 20rem; }
+    .message.unread .message__inner::after {
+      position: absolute;
+      top: 10rem;
+      left: 0;
+      display: block;
+      width: 8rem;
+      height: 8rem;
+      background: #7C9DA8;
+      border-radius: 8rem;
+      -webkit-transition: background 500ms;
+      -o-transition: background 500ms;
+      transition: background 500ms; }
+  .message:hover {
+    background: rgba(187, 203, 208, 0.8);
+    -webkit-box-shadow: -10rem -10rem 20rem rgba(255, 255, 255, 0.2), 10rem 10rem 10rem rgba(139, 168, 189, 0.05);
+            box-shadow: -10rem -10rem 20rem rgba(255, 255, 255, 0.2), 10rem 10rem 10rem rgba(139, 168, 189, 0.05); }
+    .message:hover .message__passed, .message:hover .message__bottom, .message:hover .message__author, .message:hover .message__text {
+      color: #fff; }
+    .message:hover .message__inner::after,
+    .message:hover .message__bottom span::before {
+      background: #fff; }
+
+.messages.unread_only .message:not(.unread) {
+  display: none; }
 
 /*# sourceMappingURL=main.css.map */
